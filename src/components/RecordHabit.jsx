@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../api/axiosClient";
+import "../styles/global.css";
 
 export default function RecordHabit() {
   const [members, setMembers] = useState([]);
@@ -39,7 +40,7 @@ export default function RecordHabit() {
   };
 
   return (
-    <div>
+    <div className="card">
       <h2>Registrar Hábito Diario</h2>
 
       <form onSubmit={handleSubmit}>
@@ -64,8 +65,8 @@ export default function RecordHabit() {
         <button type="submit">Guardar</button>
       </form>
 
-      {ok && <p style={{ color: "green" }}>{ok}</p>}
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      {ok && <p className="success">{ok}</p>}
+      {error && <p className="error">{error}</p>}
     </div>
   );
 }

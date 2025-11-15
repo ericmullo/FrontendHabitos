@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import api from "../api/axiosClient";
+import "../styles/global.css";
 
 export default function Dashboard() {
   const [records, setRecords] = useState([]);
@@ -10,12 +11,12 @@ export default function Dashboard() {
   }, []);
 
   return (
-    <div>
+    <div className="card" style={{ maxWidth: "700px" }}>
       <h2>Dashboard Familiar</h2>
 
       {records.map(r => (
-        <div key={r.id} style={{ marginBottom: "1rem" }}>
-          <strong>{r.member.nombres}</strong> — {r.habit.nombre}  
+        <div key={r.id} className="record-card">
+          <strong>{r.member.nombres}</strong> — {r.habit.nombre}
           <br />
           Realizado: {r.cantidadRealizada} {r.habit.unidad}
           <br />

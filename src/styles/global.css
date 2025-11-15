@@ -1,0 +1,92 @@
+/* ======== ESTILO GLOBAL PROFESIONAL ======== */
+
+body {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  background: #f5f6fa;
+  color: #333;
+}
+
+h2 {
+  margin-bottom: 1rem;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #222;
+}
+
+/* CONTENEDOR CARD */
+.card {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 12px;
+  max-width: 550px;
+  margin: 2rem auto;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+
+/* FORMULARIOS */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+label {
+  font-weight: 600;
+  margin-bottom: 0.3rem;
+}
+
+input,
+select {
+  padding: 0.75rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  width: 100%;
+  transition: 0.2s;
+}
+
+input:focus,
+select:focus {
+  border-color: #4a90e2;
+  outline: none;
+  box-shadow: 0 0 5px rgba(74, 144, 226, 0.3);
+}
+
+/* BOTONES */
+button {
+  padding: 0.9rem;
+  background: #4a90e2;
+  border: none;
+  color: white;
+  font-size: 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.25s;
+  font-weight: 600;
+}
+
+button:hover {
+  background: #357abd;
+}
+
+/* MENSAJES */
+p.success {
+  color: #27ae60;
+  font-weight: 600;
+}
+
+p.error {
+  color: #e74c3c;
+  font-weight: 600;
+}
+
+/* TARJETAS DEL DASHBOARD */
+.record-card {
+  background: white;
+  padding: 1.2rem;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.08);
+  border-left: 4px solid #4a90e2;
+}

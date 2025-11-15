@@ -1,6 +1,7 @@
 import { useState } from "react";
 import api from "../api/axiosClient";
 import FamilySelect from "./FamilySelect";
+import "../styles/global.css";
 
 export default function MemberForm() {
   const [nombres, setNombres] = useState("");
@@ -39,46 +40,35 @@ export default function MemberForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <div className="card">
       <h2>Registrar Miembro</h2>
 
-      <div>
-        <label>Nombres</label>
-        <input
-          value={nombres}
-          onChange={(e) => setNombres(e.target.value)}
-          required
-        />
-      </div>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label>Nombres</label>
+          <input value={nombres} onChange={(e) => setNombres(e.target.value)} required />
+        </div>
 
-      <div>
-        <label>Cédula (validada en back)</label>
-        <input
-          value={cedula}
-          onChange={(e) => setCedula(e.target.value)}
-          required
-        />
-      </div>
+        <div>
+          <label>Cédula</label>
+          <input value={cedula} onChange={(e) => setCedula(e.target.value)} required />
+        </div>
 
-      <div>
-        <label>Fecha de Nacimiento</label>
-        <input
-          type="date"
-          value={fechaNacimiento}
-          onChange={(e) => setFechaNacimiento(e.target.value)}
-          required
-        />
-      </div>
+        <div>
+          <label>Fecha de nacimiento</label>
+          <input type="date" value={fechaNacimiento} onChange={(e) => setFechaNacimiento(e.target.value)} required />
+        </div>
 
-      <div>
-        <label>Familia</label>
-        <FamilySelect value={familyId} onChange={setFamilyId} />
-      </div>
+        <div>
+          <label>Familia</label>
+          <FamilySelect value={familyId} onChange={setFamilyId} />
+        </div>
 
-      <button type="submit">Guardar</button>
+        <button type="submit">Guardar</button>
 
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      {ok && <p style={{ color: "green" }}>{ok}</p>}
-    </form>
+        {error && <p className="error">{error}</p>}
+        {ok && <p className="success">{ok}</p>}
+      </form>
+    </div>
   );
 }

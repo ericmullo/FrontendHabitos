@@ -1,5 +1,6 @@
 import { useState } from "react";
 import api from "../api/axiosClient";
+import "../styles/global.css";
 
 export default function CreateHabit() {
   const [nombre, setNombre] = useState("");
@@ -30,7 +31,7 @@ export default function CreateHabit() {
   };
 
   return (
-    <div>
+    <div className="card">
       <h2>Crear Hábito</h2>
       <form onSubmit={handleSubmit}>
         <label>Nombre</label>
@@ -45,8 +46,8 @@ export default function CreateHabit() {
         <button type="submit">Guardar</button>
       </form>
 
-      {ok && <p style={{ color: "green" }}>{ok}</p>}
-      {error && <p style={{ color: "red" }}>{error}</p>}
+      {ok && <p className="success">{ok}</p>}
+      {error && <p className="error">{error}</p>}
     </div>
   );
 }
