@@ -7,70 +7,75 @@ import MembersTable from "./components/MembersTable";
 import HabitsTable from "./components/HabitsTable";
 import RecordsTable from "./components/RecordsTable";
 import FamilySelect from "./components/FamilySelect";
-import Login from "./components/Login";   // 👈 importa el login
+import Login from "./components/Login";
 import "./styles/global.css";
 
 function App() {
   const [page, setPage] = useState("members");
-
-  // estado simple para saber si ya se logueó
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  // familia seleccionada (1 = Familia Mullo, 2 = otra, etc.)
   const [familyId, setFamilyId] = useState(1);
-
   const [membersReload, setMembersReload] = useState(0);
   const [habitsReload, setHabitsReload] = useState(0);
   const [recordsReload, setRecordsReload] = useState(0);
 
-  // mientras no esté logueado, solo mostramos el login
+  // Si no está logueado, solo mostramos el login
   if (!isLoggedIn) {
     return <Login onLogin={() => setIsLoggedIn(true)} />;
   }
 
-  // una vez logueado, mostramos el admin
   return (
     <div className="app-root">
-      <div className="app-container">
-        <h1 className="app-title">Admin Hábitos Familiares</h1>
+      <div className="app-shell">
+        {/* CABECERA DENTRO DE LA CARD */}
+        <header className="app-header">
+          <div className="app-header-text">
+            <h1>Admin Hábitos Familiares</h1>
+            <p>
+              Gestiona miembros, define hábitos y registra el progreso diario
+              de tu familia desde un solo panel.
+            </p>
+          </div>
 
-        <nav className="tabs">
-          <button
-            className={`tab-button ${page === "members" ? "active" : ""}`}
-            onClick={() => setPage("members")}
-          >
-            Miembros
-          </button>
-          <button
-            className={`tab-button ${page === "habits" ? "active" : ""}`}
-            onClick={() => setPage("habits")}
-          >
-            Hábitos
-          </button>
-          <button
-            className={`tab-button ${page === "records" ? "active" : ""}`}
-            onClick={() => setPage("records")}
-          >
-            Registrar Hábitos
-          </button>
-          <button
-            className={`tab-button ${page === "dashboard" ? "active" : ""}`}
-            onClick={() => setPage("dashboard")}
-          >
-            Dashboard
-          </button>
-        </nav>
+          <nav className="app-tabs">
+            <button
+              className={`tab-button ${page === "members" ? "active" : ""}`}
+              onClick={() => setPage("members")}
+            >
+              Miembros
+            </button>
+            <button
+              className={`tab-button ${page === "habits" ? "active" : ""}`}
+              onClick={() => setPage("habits")}
+            >
+              Hábitos
+            </button>
+            <button
+              className={`tab-button ${page === "records" ? "active" : ""}`}
+              onClick={() => setPage("records")}
+            >
+              Registrar Hábitos
+            </button>
+            <button
+              className={`tab-button ${page === "dashboard" ? "active" : ""}`}
+              onClick={() => setPage("dashboard")}
+            >
+              Dashboard
+            </button>
+          </nav>
+        </header>
 
-        {/* selector de familia actual */}
-        <div className="family-filter">
+        {/* FILTRO DE FAMILIA */}
+        <section className="app-toolbar">
           <span>Familia actual:</span>
           <FamilySelect
             value={familyId}
             onChange={(value) => setFamilyId(Number(value))}
           />
-        </div>
+        </section>
 
-        <main className="app-content">
+        {/* CONTENIDO PRINCIPAL */}
+        <main className="app-main">
           {page === "members" && (
             <div className="page-two-col">
               <div className="card">
@@ -101,7 +106,10 @@ function App() {
                   onCreated={() => setRecordsReload((prev) => prev + 1)}
                 />
               </div>
-              <RecordsTable reloadToken={recordsReload} familyId={familyId} />
+              <RecordsTable
+                reloadToken={recordsReload}
+                familyId={familyId}
+              />
             </div>
           )}
 
