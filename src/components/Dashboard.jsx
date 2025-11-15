@@ -2,19 +2,22 @@ import { useEffect, useState } from "react";
 import api from "../api/axiosClient";
 import "../styles/global.css";
 
-export default function Dashboard() {
+export default function Dashboard({ familyId }) {
   const [records, setRecords] = useState([]);
 
   useEffect(() => {
-    api.get("/records/by-family/1")
-      .then(r => setRecords(r.data));
-  }, []);
+    if (!familyId) return;
+
+    api
+      .get(`/records/by-family/${familyId}`)
+      .then((r) => setRecords(r.data));
+  }, [familyId]);
 
   return (
-    <div className="card" style={{ maxWidth: "700px" }}>
+    <>
       <h2>Dashboard Familiar</h2>
 
-      {records.map(r => (
+      {records.map((r) => (
         <div key={r.id} className="record-card">
           <strong>{r.member.nombres}</strong> — {r.habit.nombre}
           <br />
@@ -23,6 +26,6 @@ export default function Dashboard() {
           Cumplimiento: {r.porcentajeCumplimiento.toFixed(0)}%
         </div>
       ))}
-    </div>
+    </>
   );
 }

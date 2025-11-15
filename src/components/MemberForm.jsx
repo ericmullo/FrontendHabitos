@@ -1,9 +1,8 @@
 import { useState } from "react";
 import api from "../api/axiosClient";
 import FamilySelect from "./FamilySelect";
-import "../styles/global.css";
 
-export default function MemberForm() {
+export default function MemberForm({ onCreated }) {
   const [nombres, setNombres] = useState("");
   const [cedula, setCedula] = useState("");
   const [fechaNacimiento, setFechaNacimiento] = useState("");
@@ -30,6 +29,8 @@ export default function MemberForm() {
       setCedula("");
       setFechaNacimiento("");
       setFamilyId("");
+
+      if (onCreated) onCreated(); // 👈 avisa al padre
     } catch (err) {
       if (err.response?.data?.error) {
         setError(err.response.data.error);
@@ -40,23 +41,36 @@ export default function MemberForm() {
   };
 
   return (
-    <div className="card">
+    <>
       <h2>Registrar Miembro</h2>
 
       <form onSubmit={handleSubmit}>
         <div>
           <label>Nombres</label>
-          <input value={nombres} onChange={(e) => setNombres(e.target.value)} required />
+          <input
+            value={nombres}
+            onChange={(e) => setNombres(e.target.value)}
+            required
+          />
         </div>
 
         <div>
-          <label>Cédula</label>
-          <input value={cedula} onChange={(e) => setCedula(e.target.value)} required />
+          <label>Cédula (validada en back)</label>
+          <input
+            value={cedula}
+            onChange={(e) => setCedula(e.target.value)}
+            required
+          />
         </div>
 
         <div>
           <label>Fecha de nacimiento</label>
-          <input type="date" value={fechaNacimiento} onChange={(e) => setFechaNacimiento(e.target.value)} required />
+          <input
+            type="date"
+            value={fechaNacimiento}
+            onChange={(e) => setFechaNacimiento(e.target.value)}
+            required
+          />
         </div>
 
         <div>
@@ -69,6 +83,6 @@ export default function MemberForm() {
         {error && <p className="error">{error}</p>}
         {ok && <p className="success">{ok}</p>}
       </form>
-    </div>
+    </>
   );
 }

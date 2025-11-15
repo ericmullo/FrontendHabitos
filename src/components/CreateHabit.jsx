@@ -1,8 +1,7 @@
 import { useState } from "react";
 import api from "../api/axiosClient";
-import "../styles/global.css";
 
-export default function CreateHabit() {
+export default function CreateHabit({ onCreated }) {
   const [nombre, setNombre] = useState("");
   const [unidad, setUnidad] = useState("");
   const [metaDiaria, setMetaDiaria] = useState("");
@@ -25,13 +24,15 @@ export default function CreateHabit() {
       setNombre("");
       setUnidad("");
       setMetaDiaria("");
+
+      if (onCreated) onCreated(); // 👈 recargar tabla
     } catch {
       setError("Error al crear hábito");
     }
   };
 
   return (
-    <div className="card">
+    <>
       <h2>Crear Hábito</h2>
       <form onSubmit={handleSubmit}>
         <label>Nombre</label>
@@ -41,13 +42,16 @@ export default function CreateHabit() {
         <input value={unidad} onChange={(e) => setUnidad(e.target.value)} />
 
         <label>Meta Diaria</label>
-        <input value={metaDiaria} onChange={(e) => setMetaDiaria(e.target.value)} />
+        <input
+          value={metaDiaria}
+          onChange={(e) => setMetaDiaria(e.target.value)}
+        />
 
         <button type="submit">Guardar</button>
-      </form>
 
-      {ok && <p className="success">{ok}</p>}
-      {error && <p className="error">{error}</p>}
-    </div>
+        {ok && <p className="success">{ok}</p>}
+        {error && <p className="error">{error}</p>}
+      </form>
+    </>
   );
 }
