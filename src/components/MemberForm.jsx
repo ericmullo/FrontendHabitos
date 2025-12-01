@@ -1,3 +1,4 @@
+// src/components/MemberForm.jsx
 import { useState } from "react";
 import api from "../api/axiosClient";
 import FamilySelect from "./FamilySelect";
@@ -30,7 +31,7 @@ export default function MemberForm({ onCreated }) {
       setFechaNacimiento("");
       setFamilyId("");
 
-      if (onCreated) onCreated(); // 👈 avisa al padre
+      if (onCreated) onCreated();
     } catch (err) {
       if (err.response?.data?.error) {
         setError(err.response.data.error);
@@ -75,6 +76,7 @@ export default function MemberForm({ onCreated }) {
 
         <div>
           <label>Familia</label>
+          {/* 👇 AQUÍ NO QUEREMOS AGREGAR FAMILIA */}
           <FamilySelect value={familyId} onChange={setFamilyId} />
         </div>
 

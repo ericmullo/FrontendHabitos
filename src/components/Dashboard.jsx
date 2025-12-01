@@ -33,7 +33,11 @@ export default function Dashboard({ familyId }) {
   }
 
   if (error) {
-    return <div className="card"><p className="error">{error}</p></div>;
+    return (
+      <div className="card">
+        <p className="error">{error}</p>
+      </div>
+    );
   }
 
   if (!data) {

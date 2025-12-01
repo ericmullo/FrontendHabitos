@@ -1,3 +1,4 @@
+// src/App.jsx
 import { useState } from "react";
 import MemberForm from "./components/MemberForm";
 import CreateHabit from "./components/CreateHabit";
@@ -70,7 +71,8 @@ function App() {
           <span>Familia actual:</span>
           <FamilySelect
             value={familyId}
-            onChange={(value) => setFamilyId(Number(value))}
+            onChange={setFamilyId}   // FamilySelect ya devuelve Number
+            allowCreate={true}       // 👈 AQUÍ activas el botón "Agregar"
           />
         </section>
 
