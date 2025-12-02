@@ -8,6 +8,7 @@ import MembersTable from "./components/MembersTable";
 import HabitsTable from "./components/HabitsTable";
 import RecordsTable from "./components/RecordsTable";
 import FamilySelect from "./components/FamilySelect";
+import CompareFamilies from "./components/CompareFamilies"; // 👈 comparaciones
 import Login from "./components/Login";
 import "./styles/global.css";
 
@@ -63,18 +64,26 @@ function App() {
             >
               Dashboard
             </button>
+            <button
+              className={`tab-button ${page === "compare" ? "active" : ""}`}
+              onClick={() => setPage("compare")}
+            >
+              Comparaciones
+            </button>
           </nav>
         </header>
 
-        {/* FILTRO DE FAMILIA */}
-        <section className="app-toolbar">
-          <span>Familia actual:</span>
-          <FamilySelect
-            value={familyId}
-            onChange={setFamilyId}   // FamilySelect ya devuelve Number
-            allowCreate={true}       // 👈 AQUÍ activas el botón "Agregar"
-          />
-        </section>
+        {/* FILTRO DE FAMILIA (oculto solo en la página de comparaciones) */}
+        {page !== "compare" && (
+          <section className="app-toolbar">
+            <span>Familia actual:</span>
+            <FamilySelect
+              value={familyId}
+              onChange={setFamilyId} // FamilySelect ya devuelve Number
+              allowCreate={true}     // aquí sí puedes crear familias
+            />
+          </section>
+        )}
 
         {/* CONTENIDO PRINCIPAL */}
         <main className="app-main">
@@ -118,6 +127,12 @@ function App() {
           {page === "dashboard" && (
             <div className="card">
               <Dashboard familyId={familyId} />
+            </div>
+          )}
+
+          {page === "compare" && (
+            <div className="card">
+              <CompareFamilies />
             </div>
           )}
         </main>
